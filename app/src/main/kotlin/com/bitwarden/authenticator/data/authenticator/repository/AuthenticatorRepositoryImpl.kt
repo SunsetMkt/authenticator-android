@@ -57,8 +57,6 @@ private const val STOP_TIMEOUT_DELAY_MS: Long = 5_000L
 
 /**
  * Default implementation of [AuthenticatorRepository].
- *
- * TODO: make sure none of these deps are unused
  */
 @Suppress("TooManyFunctions", "LongParameterList")
 class AuthenticatorRepositoryImpl @Inject constructor(
@@ -146,7 +144,7 @@ class AuthenticatorRepositoryImpl @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override val sharedCodesStateFlow: StateFlow<SharedVerificationCodesState> by lazy {
-        if (!featureFlagManager.getFeatureFlag(LocalFeatureFlag.BitwardenAuthenticationEnabled)) {
+        if (!featureFlagManager.getFeatureFlag(LocalFeatureFlag.PasswordManagerSync)) {
             MutableStateFlow(SharedVerificationCodesState.FeatureNotEnabled)
         } else {
             authenticatorBridgeManager
